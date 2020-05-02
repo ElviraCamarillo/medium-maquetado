@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medium</title>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
+    <link rel="icon" href="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico" class="js-favicon"><link rel="apple-touch-icon" sizes="152x152" href="https://cdn-images-1.medium.com/fit/c/304/304/1*8I-HPL0bfoIzGied-dzOvA.png"><link rel="apple-touch-icon" sizes="120x120" href="https://cdn-images-1.medium.com/fit/c/240/240/1*8I-HPL0bfoIzGied-dzOvA.png"><link rel="apple-touch-icon" sizes="76x76" href="https://cdn-images-1.medium.com/fit/c/152/152/1*8I-HPL0bfoIzGied-dzOvA.png"><link rel="apple-touch-icon" sizes="60x60" href="https://cdn-images-1.medium.com/fit/c/120/120/1*8I-HPL0bfoIzGied-dzOvA.png"><link rel="mask-icon" href="https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg" color="#171717">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- ADD THE MODAL FORM TO SEND A POST IN DB -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">New Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre del Autor</label>
+                            <input type="text" class="form-control" id="author" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Categoría del Post</label>
+                            <input type="text" class="form-control" id="category">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Titulo del Post</label>
+                            <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Fecha</label>
+                            <input type="text" class="form-control" id="createdAt">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Abstract del Post</label>
+                            <textarea class="form-control" id="abstract" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Descripción del Post</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Coloca el enlace de tu imagen aqui: </label>
+                            <input type="text" class="form-control" id="urlImage">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tiempo de lectura estimado</label>
+                            <input type="text" class="form-control" id="minToRead">
+                        </div>
+                        <div class="form-group d-none">
+                            <input type="text" class="form-control" id="group" value="Popular On Medium">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="save-post">Submit</button>
+                        </div>
+                    </form>
+            </div>
+            </div>
+        </div>
+        </div>
+        
+    <div class="container-fluid">
+        <!-- HEADER: --IVAN-- -->
+        <div class="row d-flex justify-content-around align-items-center px-3 m-0"><!--Branding-->
+            <div class="col-6 py-2">
+                <div>
+                    <img src="assets/monogram/Monogram.png" alt="Medium" id="monoGram" href="index.html" height="35">
+                    <img src="assets/wordmark/Wordmark_Black.png" alt="Medium" id="wordMark" href="index.html" height="22">
+                </div>
+            </div>
+            <div class="col-6 py-2 d-flex justify-content-end align-items-center">
+                <span class="pr-2">
+                    <a id="search" href="https://medium.com/search" title="Search" aria-label="Search">
+                        <span>
+                            <span>
+                                <svg width="25" height="25">
+                                    <path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </a>
+                </span>
+                <span class="pr-2">
+                    <input type="text" id="searchBox" placeholder="Search">
+                </span>
+                <span class="pr-2">
+                    <a id="bookmarks" href="https://medium.com/me/list/queue" title="Bookmarks" aria-label="Bookmarks">
+                        <span>
+                            <span>
+                                <svg width="25" height="25">
+                                    <path d="M16 6c1.1 0 2 .9 2 2v13.661h-.012a.5.5 0 0 1-.118.285.508.508 0 0 1-.708.03L11.5 17.85l-5.662 4.125a.5.5 0 0 1-.706-.03.478.478 0 0 1-.12-.285H5V8c0-1.1.9-2 2-2h9zM6 8v12.636l5.162-3.667a.49.49 0 0 1 .676 0L17 20.637V8c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z"></path>
+                                    <path d="M21 5v13.661h-.012a.5.5 0 0 1-.118.285.508.508 0 0 1-.708.03L20 18.858V5c0-.55-.45-1-1-1h-9c-.55 0-1 .45-1 1H8c0-1.1.9-2 2-2h9c1.1 0 2 .9 2 2z"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </a>
+                </span>
+                <span class="pr-2">
+                    <a id="notifications" class="btn p-0" aria-pressed="false" title="Notifications" aria-label="Notifications">
+                        <span>
+                            <svg width="25" height="25" viewBox="-293 409 25 25">
+                                <path d="M-273.327 423.67l-1.673-1.52v-3.646a5.5 5.5 0 0 0-6.04-5.474c-2.86.273-4.96 2.838-4.96 5.71v3.41l-1.68 1.553c-.204.19-.32.456-.32.734V427a1 1 0 0 0 1 1h3.49a3.079 3.079 0 0 0 3.01 2.45 3.08 3.08 0 0 0 3.01-2.45h3.49a1 1 0 0 0 1-1v-2.59c0-.28-.12-.55-.327-.74zm-7.173 5.63c-.842 0-1.55-.546-1.812-1.3h3.624a1.92 1.92 0 0 1-1.812 1.3zm6.35-2.45h-12.7v-2.347l1.63-1.51c.236-.216.37-.522.37-.843v-3.41c0-2.35 1.72-4.356 3.92-4.565a4.353 4.353 0 0 1 4.78 4.33v3.645c0 .324.137.633.376.85l1.624 1.477v2.373z"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </span>
+                <span class="pr-2">
+                    <a data-toggle="modal" data-target="#exampleModalCenter" id="newPost" class="border rounded border-dark p-2 text-dark" href="">New Post</a>
+                </span>
+                <span>
+                    <a id="avatar" class="btn p-0 " aria-pressed="false" aria-haspopup="true" data-action="open-userActions">
+                        <div>
+                            <img src="https://cdn-images-1.medium.com/fit/c/64/64/2*pcsIaAdsDrV1rEjYpRLCkg.jpeg" alt="Gabriela Camarillo" height="32" width="32" class="rounded-circle">
+                        </div>
+                    </a>
+                </span>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center px-3 m-0">
+            <div class="navBar">
+                <a href="index.html">Home</a>
+                <a href="https://coronavirus.medium.com/">Coronavirus Blog</a>
+                <a href="https://onezero.medium.com/">ONEZERO</a>
+                <a href="https://elemental.medium.com">Elemental</a>
+                <a href="https://gen.medium.com/">Gen</a>
+                <a href="https://zora.medium.com">Zora</a>
+                <a href="https://forge.medium.com">Forge</a>
+                <a href="https://humanparts.medium.com">Human Parts</a>
+                <a href="https://marker.medium.com/">Marker</a>
+                <a href="https://level.medium.com/">Level</a>
+                <a href="https://heated.medium.com/">Heated</a>
+                <a href="https://medium.com/topics">More</a>
+            </div>
+        </div>
+        <!-- ROW 1: POST RECENT: --VICTOR-- -->
+
+        <div class="row container--medium">
+            <div class="col-12 col-md-6 col-xl-5 p-2">
+                <div class="card w-100 border rounded-0 border-0">
+                    <div class="img-guys">
+                        <img class="card-img-top content-img-guys" src="./assets/img/1_X7gZMZKtrjtLBYkkV6B3rA.jpeg" alt="Guys Right Now">
+                    </div>
+                    <div class="card-body ml-5">
+                        <div>
+                            <h1 class="card-title title-post">America Needs Guys Right Now, Not Men</h1>
+                            <p class="color-secondary">
+                                Some of these men are gonna die shortly, and probably take your grandma along with them.
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-column justify-content-between">
+                                <h6><a class="author-info"><span class="show-dialog">Drew Magary</span></a> in <a class="company-info"><span class="company-dialog">Forge</span></a></h6>
+                                <a class="time-info d-flex align-items-center color-secondary">
+                                    <time datetime="2020-03-25 20:00" class="time-info">Mar 25 </time>
+                                    <span class="icon-point time-info">&#x205f;&#x205f;&#128900;&#x205f;&#x205f;</span>
+                                    <span class="time-info">7 min read</span>
+                                    <span class="icon-star time-info">&#x205f;&#x205f;&#x2605;</span>
+                                </a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="icon-points">&#x23fa;&#x23fa;&#x23fa;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- -----Stasck of cards----- -->
+            <div class="d-none d-md-block col-12 col-md-6 col-xl-4 px-2">
+                <!-- Card 1 -->
+                <div class="card post-stack mb-3 rounded-0 border-0 mt-2 ">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                        <img src="./assets/img/imgCard1.jpeg" class="card-img" alt="Img Artycle">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body pt-0 pb-2 pl-4">
+                                    <div>
+                                        <h2 class="card-title title-post-stack">
+                                            Don’t Let #Quarantinspo Stress You Out
+                                        </h2>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-column justify-content-between">
+                                            <h6><a class="author-info"><span class="show-dialog">Michelle Woo</span></a> in <a class="company-info"><span class="company-dialog">Forge</span></a></h6>
+                                            <a class="time-info d-flex align-items-center color-secondary">
+                                                <time datetime="2020-03-25 20:00" class="time-info-stack">a few ago</time>
+                                                <span class="icon-point time-info">&#x205f;&#x205f;&#128900;&#x205f;&#x205f;</span>
+                                                <span class="time-info">4 min read</span>
+                                                <span class="icon-star time-info">&#x205f;&#x205f;&#x2605;</span>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="icon-points">&#x23fa;&#x23fa;&#x23fa;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                                <!-- Card 2 -->
+                <div class="card post-stack mb-3 rounded-0 border-0">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="./assets/img/imgCard2.jpeg" class="card-img" alt="Img Artycle">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body pt-0 pb-2 pl-4">
+                                <div>
+                                    <h2 class="card-title title-post-stack">
+                                            A Taxonomy of Online Pandemic Archetypes
+                                    </h2>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-column justify-content-between">
+                                        <h6><a class="author-info"><span class="show-dialog">Kelli María</span></a> in <a class="company-info"><span class="company-dialog">Forge</span></a></h6>
+                                        <a class="time-info d-flex align-items-center color-secondary">
+                                            <time datetime="2020-03-25 20:00" class="time-info-stack">Mar 28</time>
+                                            <span class="icon-point time-info">&#x205f;&#x205f;&#128900;&#x205f;&#x205f;</span>
+                                            <span class="time-info">3 min read</span>
+                                            <span class="icon-star time-info">&#x205f;&#x205f;&#x2605;</span>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="icon-points">&#x23fa;&#x23fa;&#x23fa;</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card post-stack mb-3 rounded-0 border-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="./assets/img/imgCard3.jpeg" class="card-img" alt="Img Artycle">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body pt-0 pb-2 pl-4">
+                                    <div>
+                                        <h2 class="card-title title-post-stack">
+                                            Use the ‘Circle of Concern’ to Reframe Your Fears in Uncertain Times...
+                                        </h2>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-column justify-content-between">
+                                            <h6><a class="author-info"><span class="show-dialog">Brian Pennie</span></a> in <a class="company-info"><span class="company-dialog">Forge</span></a></h6>
+                                            <a class="time-info d-flex align-items-center color-secondary">
+                                                <time datetime="2020-03-25 20:00" class="time-info-stack">Mar 14</time>
+                                                <span class="icon-point time-info">&#x205f;&#x205f;&#128900;&#x205f;&#x205f;</span>
+                                                <span class="time-info">2 min read</span>
+                                                <span class="icon-star time-info">&#x205f;&#x205f;&#x2605;</span>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="icon-points">&#x23fa;&#x23fa;&#x23fa;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+            <!-- Post right -->
+            <div class="d-none d-xl-block col-xl-3">
+                <div class="card w-100 rounded-0 border-0 mt-2">
+                    <div class="img-guys">
+                        <img class="card-img-top content-img-guys" src="./assets/img/imgCardRight.jpeg" alt="Guys Right Now">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h1 class="card-title title-post">Don’t Just Avoid the Virus — Defeat It by Strengthening... </h1>
+                            <p class="color-secondary">
+                                    Simple, science-based steps to boost y...
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-column justify-content-between">
+                                <h6><a class="author-info"><span class="show-dialog">Amory Lovins</span></a></h6>
+                                <a class="time-info d-flex align-items-center color-secondary">
+                                    <time datetime="2020-03-25 20:00" class="time-info">Mar 25 </time>
+                                    <span class="icon-point time-info">&#x205f;&#x205f;&#128900;&#x205f;&#x205f;</span>
+                                    <span class="time-info">7 min read</span>
+                                    <span class="icon-star time-info">&#x205f;&#x205f;&#x2605;</span>
+                                </a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="icon-points">&#x23fa;&#x23fa;&#x23fa;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 d-flex flex-column btn-see-editors">
+                <a class="align-self-lg-end">SEE EDITOR'S PICK &#x205f;&#x205f;&#x276d;</a>
+            </div>
+            <hr class="hr-footer align-self-center my-4">
+        </div>
+        
+        <!-- ROW 2: POST POPULAR: --GABS-- -->
+        <div class="row">
+            <div class="container--medium d-flex" id="bottomPostsLists">
+                <!-- container left -->
+                <div class="pt-2 list-post-left pl-4 pl-md-0 pr-4 pr-md-4" id="listPostCenter">
+                    <!-- items  listPostCenter -->     
+                </div>
+                <!-- container right -->
+                <div class="list-post-right">
+                    <div class="post-title mb-3 pl-4 pr-4 pl-md-0 pr-md-0">
+                        <h2 class="post-title-top">Popular on Medium</h2>
+                    </div>
+                    <!-- item article -->
+                    <div id="sidebarPost">
+                      <!-- sidebar content post   -->
+                    </div>
+                
+                    
+                    <div class="post-footer d-none d-md-block ">
+                        <ul class="pt-2 list-footer">
+                            <li><a href=""https://help.medium.com"">Help</a> </li>
+                            <li><a href=""https://medium.statuspage.io"">Status</a> </li>
+                            <li><a href=""https://medium.com/creators"">Writers</a> </li>
+                            <li><a href="href="https://medium.com/3minread"">Blog</a></li>
+                            <li><a href=""https://medium.com/jobs-at-medium/work-at-medium-959d1a85284e"">Careers</a> </li>
+                            <li><a href=""https://medium.com/policy/f03bf92035c9" title="Read Medium’s policies" ">Privacy</a> </li>
+                            <li><a href=""//medium.com/policy/9db0094a1e0f"">Terms</a> </li>
+                            <li><a href=""https://about.medium.com" title="More about Medium"">about</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- container hidden -->
+                <div class="d-md-none list-post-left px-4" id="listPostBottom">
+                    <!-- articles listPostBottom only mobile -->
+                </div>
+               
+            </div>
+        </div>
+
+        <!-- Modal Post-->
+        <!-- Modal -->
+        <div class="modal fade" id="modalPostPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="text-left font-weight-bold modal-title" id="exampleModalLongTitle">4 Hidden Python Features that Beginners should Know</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <p class="card-infoPost mb-0">
+                        <span class="card-author"></span>
+                        in 
+                        <span class="card-group"></span>
+                    </p>
+                    <p class="card-datePost">
+                        <span class="card-date"></span>
+                        ·
+                        <span class="card-minread"></span> min read
+                    </p>
+                    <div class="mb-4 full-image-post"> </div>
+                    <p class="card-abstract"></p>
+                    <p class="card-description"></p>
+                    
+                </div>
+                
+            </div>
+            </div>
+        </div>
+       
+        </div>
+    
+   
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
+
